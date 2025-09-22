@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Upload_Files_APP.Models.UploadFile>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Upload Files</h1>
+
+<p>
+    <a asp-action="Upload" class="btn btn-primary">Upload</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoredFileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContentType)
+            </th>
+            <th class="col-5"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoredFileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContentType)
+                </td>
+                <td class="col-5">
+                    @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | *@
+                    @* @Html.ActionLink("Download", "Download", new { /* id=item.PrimaryKey */ }) | *@
+                    <a class="btn btn-info" asp-action="DownloadFile" asp-route-fileName="@item.StoredFileName">Download</a>
+                    <a class="btn btn-danger" asp-action="DeleteFile" asp-route-fileName="@item.StoredFileName">Delete</a>
+                    @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
